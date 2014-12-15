@@ -1,0 +1,168 @@
+<html>
+
+<style>
+	article {
+		outline: 2px solid red;
+		margin: 10px;
+	}
+
+</style>
+<body>
+
+
+	<article>
+		<strong>Show direction: direction is acting like right-aligned</strong>
+		<div style="direction: rtl;">
+			<h1>Heading</h1>
+			This is a atext line;
+		</div>
+	</article>
+	
+	
+	<article>
+		<strong>Show direction and unicode-bidi</strong>
+		<div >
+			<h1>Heading</h1>
+			 text following is right to left: <span style="direction: rtl;unicode-bidi:bidi-override"><strong>embedded character from other language</strong></span>.  End of right to left.;
+		</div>
+	</article>
+
+	<article>
+		<strong>show direction (rtl)effect on column order</strong>
+		<table  style="direction: rtl;">
+			<thead>
+				<tr>
+					<th>
+						<div>column 1</div>
+					</th>
+					<th>
+						<div>
+							column 2
+							<div></div>
+					</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>td1</td>
+					<td>td2</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<article>
+		<strong>Show writing mode: basic:vertical-rl</strong>
+		<div style="-webkit-writing-mode: vertical-rl; width: 100%;">
+			<h1>Heading</h1>
+			This is a atext line;
+		</div>
+	</article>
+	<article>
+		<strong>Show writing mode: basic:vertical-lr</strong>
+		<div style="-webkit-writing-mode: vertical-lr; width: 100%;">
+			<h1>Heading</h1>
+			This is a atext line;
+		</div>
+	</article>
+
+
+	<article>
+		<strong>Show writing mode on column head</strong>
+		<table>
+			<thead>
+				<tr>
+					<th>
+						<div style="-webkit-writing-mode: vertical-rl; height: 70px;">column 1</div>
+					</th>
+					<th>
+						<div style="-webkit-writing-mode: vertical-rl; height: 70px;">
+							column 2
+							<div></div>
+					</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>td1</td>
+					<td>td2</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</article>
+	<article>
+		<strong>white-space:pre</strong>
+		<p style="white-space: pre;">
+		line                 one: with white space
+		line <br/>two: with &lt;br&gt;
+		This is a long line, will trigger line wrap. This is a long line, will trigger line wrap. This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.
+		</p>
+	</article>
+	<article>
+		<strong>white-space:pre-line</strong>
+		<p style="white-space: pre-line;">
+		line                 one: with white space
+		line <br/>two: with &lt;br&gt;
+		This is a long line, will trigger line wrap. This is a long line, will trigger line wrap. This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.
+		</p>
+	</article>
+	<article>
+		<strong>white-space:pre-wrap</strong>
+		<p style="white-space: pre-wrap;">
+		line                 one: with white space
+		line <br/>two: with &lt;br&gt;
+		This is a long line, will trigger line wrap. This is a long line, will trigger line wrap. This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.This is a long line, will trigger line wrap.
+		</p>
+	</article>
+	
+	<article>
+		<strong>text spaceing, text decoration, text transform</strong>
+		<p style="line-height: 50px;">
+		<span style="word-spacing: 20px;" > word spacing. </span>
+		<span style="letter-spacing: 20px;">letter spacing</span> 
+		<span style="text-transform: uppercase;"> upper case transformation</span> 
+		<span style="text-transform: lowercase;">Lower CASE transformation</span> 
+		<span style="text-transform: capitalize;">captilize</span>
+		<span style="text-decoration: underline;">underline text decoration</span>
+		<span style="text-decoration: overline;">overline text decoration</span>
+		<span style="text-decoration: line-through;">strikethrough text decoration</span>
+	</article>
+	
+	<article>
+		<strong> text overflow</strong>
+		<div style="width:100px;height:20px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap">
+			 a lot of text bounded by 100x20, we will have text overflow
+		</div>
+	</article>
+	
+	<article>
+		<strong> text layout</strong>
+		<ol>
+			<li>Do we have overflow? if Yes, then we have overflow rule</li>
+			<li>If overflow is handled as clip, hidden, or wrap: 
+			<ul>
+				<li>overflow is handled as hidden, do we need to show "ellipsis"? if yex, text-overflow:ellipsis</li>
+				<li>overflow is handled as clipped</li>
+				<li>overflow is handled as wrap, how do we handle word-break: overflow-wrap: break-word</li>
+			</ul>
+			<li> if no overflow, how is line break in text is handled(white-space)</li>
+			<li> if line break is needed, how is word-break is handled: word-break:break-all/break-word. if not break-all, browser will adjust white space to make sure 
+			line break does not break word.</li>
+		
+		</ol>
+		<mark> Also see how inline-block can be used to for layout instead of float</mark>
+		<div style="width:200px;height:100px; word-break:break-word;display: inline-block;">
+			 Someone is making somebody angry. Please see the word alignment.
+		</div>
+		<div style="width:200px;height:100px; word-break:break-all;display: inline-block;">
+			 Someone is making somebody angry. Please see the word alignment.
+		</div>
+	
+	</article>
+</body>
+
+</html>
