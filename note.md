@@ -11,4 +11,9 @@ If A, A1, A2, B are in the same stacking context, the deep element(children of A
 **Float**
 
 [basic ](http://css.maxdesign.com.au/floatutorial/introduction.htm)
+
 content in Element after floating element will wrap around float element.  But its dimension is drawn out as if the floated element does not exist. This could be that we only can have box model, we could not have polygon model. While content will wrap around a floated element, border, background image and background color will extend underneath.
+
+**counter vs counters**
+
+counter(identifier) is used to generate content for one-level counting. counters(identifier, separator) is used to generate content for multiple-level counting.
