@@ -17,3 +17,22 @@ content in Element after floating element will wrap around float element.  But i
 **counter vs counters**
 
 counter(identifier) is used to generate content for one-level counting. counters(identifier, separator) is used to generate content for multiple-level counting.
+
+**miscallenous**
+border-collapse, border-spacing
+
+clip
+
+cursor
+
+empty-cells:hide/show
+
+overflow: auto, scroll, hidden,visible
+
+q {
+    quotes: "«" "»" "‹" "›";
+}
+
+resize: auto|both|horizontal|vertical
+
+pre {tab-size: 16;}
