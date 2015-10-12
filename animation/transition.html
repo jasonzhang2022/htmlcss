@@ -1,0 +1,80 @@
+<html ng-app="test">
+<head>
+<title>demo the transition</title>
+<style type="text/css">
+body {
+		margin: 0px;
+}
+#topcontainer {
+		 /*
+				 use border box so that the border is within the 100%;
+				 
+				 If we  use content-box(default), the total width willbe 100% +5px+5px;
+				 */
+				 box-sizing:border-box;
+				 width: 100%;
+				 height:100%;
+				 border: 5px solid blue;
+				 position: relative;
+				 background-color: grey;
+				 
+				 /* avoid scroll bar */
+				 overflow:hidden; 
+}
+
+#top {
+ width: 100px;
+ height: 100px;
+ position: absolute;
+ background-color: blue;
+ /* initial position */
+ top:30px;
+ left:30px;
+
+ transition: top 2s, left 2s;
+}
+
+/*
+Percentage of position is used. 
+top: percentage of containing element's height;
+left: percentage of containing element's width;
+*/
+#top.move {
+ top:100%;
+ left:100%;
+}
+</style>
+</head>
+<body ng-controller="test">
+	
+	<div id="topcontainer">
+		<button id="btn" ng-click="move($event)">
+		start
+		</button>
+		<div >
+			{{status}}
+		</div>
+		<div id="top">
+			Click button to move this rectangule
+		</div>
+	</div>
+
+
+<script src="../angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module("test", []).controller("test", function($scope, $window){
+			$scope.status="transition is ready";
+			$scope.move=function(e){
+				var top=document.getElementById("top");
+				top.addEventListener("transitionend", function(event){
+					$scope.$apply(function(){
+						$scope.status="transition ended";	
+					});
+					
+				})
+				top.classList.add("move");
+			};
+		});
+	</script>
+</body>
+</html>

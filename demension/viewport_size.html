@@ -1,0 +1,49 @@
+<html ng-app="test">
+	<head>
+		<title>View port</title>
+		
+		<style type="text/css">
+			body {
+				margin: 0px;
+			}
+		
+			#top {
+			 width: 90vw;
+			 height:90vh;
+			 border: 1px solid blue;
+			 position: relative;
+			
+			}
+		</style>
+	</head>
+<body>
+
+	<div id="top" ng-controller="test">
+		<ul>
+			<li>calculated Viewport Width/Height: {{calculatedVW}}, {{calculatedVH}} using vw and vh</li>
+			<li> Inner Width/Height: {{windowInnerWidth}}, {{windowInnerHeight}} </li>
+			<li> Document Client Widht/Height:  {{documentWidth}} {{documentHeight}}</li>
+		
+		</ul>
+	</div>
+
+</body>
+	
+	<script src="../angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module("test", []).controller("test", function($scope, $window){
+			var top=document.getElementById("top");
+			$scope.elementWidth=top.clientWidth;
+			$scope.elementHeight=top.clientHeight;
+			$scope.calculatedVW=$scope.elementWidth/9*10;
+			$scope.calculatedVH=$scope.elementHeight/9*10;
+			
+			$scope.windowInnerWidth=window.innerWidth;
+			$scope.windowInnerHeight=window.innerHeight;
+			
+			$scope.documentWidth=document.documentElement.clientWidth;
+			$scope.documentHeight=document.documentElement.clientHeight;
+			
+		})
+	</script>
+</html>

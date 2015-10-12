@@ -1,0 +1,40 @@
+<html ng-app="test">
+	<head>
+		<title>demo the transition</title>
+		
+		<style type="text/css">
+			body {
+				margin: 0px;
+			}
+		
+			#top {
+				 /*
+				 use border box so that the border is within the 100%;
+				 
+				 If we  use content-box(default), the total width willbe 100% +5px+5px;
+				 */
+				 box-sizing:border-box;
+				 width: 100%;
+				 height:100%;
+				 border: 5px solid blue;
+				 position: relative;
+				 background-color: grey;
+			
+			}
+		</style>
+	</head>
+<body>
+
+	<div id="top" ng-controller="test">
+	
+	</div>
+
+</body>
+	
+	<script src="angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module("test", []).controller("test", function($scope, $window){
+			
+		})
+	</script>
+</html>
