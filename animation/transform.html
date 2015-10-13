@@ -22,6 +22,15 @@ body {
 				 overflow:hidden; 
 }
 
+#topback {
+ width: 100px;
+ height: 100px;
+ position: absolute;
+ background-color: yellow;
+ /* initial position */
+ top:30px;
+ left:30px;
+}
 #top {
  width: 100px;
  height: 100px;
@@ -31,7 +40,7 @@ body {
  top:30px;
  left:30px;
 
- transition: top 2s, left 2s;
+ transition: transform 2s;
  
  
 }
@@ -41,24 +50,66 @@ Percentage of position is used.
 top: percentage of containing element's height;
 left: percentage of containing element's width;
 */
-#top.rorate {
-	transform: rotate 
+#top.rotate {
+	transform: rotate(180deg);
+	transform-origin: bottom right 0;
+}
+
+#top.move {
+	transform:translate(100%, 100%);
+}
+
+#top.scale {
+	transform:scale(2);
+	transform-origin: top left 0;
+}
+
+#top.movescale {
+	transform:translate(100%, 100%) scale(2);
+	/*transform-origin: top left 0; */
 }
 
 
+#top.skew {
+	transform: skew(45deg);
+
+}
 </style>
 </head>
 <body ng-controller="test">
 	
 	<div id="topcontainer">
-		<button id="btn" ng-click="move($event)">
-		start
-		</button>
-		<div >
-			{{status}}
+		<div>
+			<button ng-click="transform($event, 'rotate')">
+			rotate, origin is at bottom and right;
+			</button>
+			<button  ng-click="transform($event, 'move')">
+			move
+			</button>
+			<button ng-click="transform($event, 'scale')">
+			scale by 2. originl is top and left
+			</button>
+			<button ng-click="transform($event, 'movescale')">
+			move and scale
+			</button>
+			<button  ng-click="transform($event, 'skew')">
+			skew
+			</button>
+			<button  ng-click="reset()">
+			reset
+			</button>
+			
+		</div>
+		
+		<div id="topback">
+			where top is at originally
 		</div>
 		<div id="top">
 			Click button to move this rectangule
+		</div>
+		<div>
+	 	When scale by 2, although the real width is 200. But clientWidth and offsetWidth are still 100px;
+		
 		</div>
 	</div>
 
@@ -66,17 +117,19 @@ left: percentage of containing element's width;
 <script src="../angular.min.js"></script>
 	<script type="text/javascript">
 		angular.module("test", []).controller("test", function($scope, $window){
-			$scope.status="transition is ready";
-			$scope.move=function(e){
+			$scope.transform=function($event, c){
 				var top=document.getElementById("top");
-				top.addEventListener("transitionend", function(event){
-					$scope.$apply(function(){
-						$scope.status="transition ended";	
-					});
-					
-				})
-				top.classList.add("move");
+				top.classList.add(c);
 			};
+			$scope.reset=function(){
+				var top=document.getElementById("top");
+				top.classList.remove("rotate");
+				top.classList.remove("move");
+				top.classList.remove("scale");
+				top.classList.remove("skew");
+				top.classList.remove("movescale");
+			}
+			
 		});
 	</script>
 </body>

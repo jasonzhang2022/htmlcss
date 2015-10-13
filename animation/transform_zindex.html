@@ -1,0 +1,99 @@
+<html ng-app="test">
+<head>
+<title>demo the transform</title>
+<style type="text/css">
+body {
+		margin: 0px;
+}
+#topcontainer {
+		 /*
+				 use border box so that the border is within the 100%;
+				 
+				 If we  use content-box(default), the total width willbe 100% +5px+5px;
+				 */
+				 box-sizing:border-box;
+				 width: 100%;
+				 height:90%;
+				 top: 10%;
+				 border: 5px solid blue;
+				 position: absolute;
+				 background-color: grey;
+				 
+				 /* avoid scroll bar */
+				 overflow:hidden; 
+}
+
+
+#center1 {
+ width: 500px;
+ height: 300px;
+ 
+ background: green;
+ position: absolute;
+ top:50%;
+ left:50%;
+ 
+ transform: translate(-50%, -50%);
+ z-index: 1;
+}
+
+#center1.front {
+	z-index:2;
+}
+#highIndex {
+	z-index: 100;
+	border: 3px solid red;
+}
+
+#center2 {
+ width: 300px;
+ height: 500px;
+ 
+ background: blue;
+ position: absolute;
+ top:50%;
+ left:50%;
+ 
+ transform: translate(-50%, -50%);
+ z-index: 1;
+}
+
+
+
+</style>
+</head>
+<body ng-controller="test">
+	
+	<div>
+		<button ng-click="showFront=true;">show first children</button>
+	</div>
+	<div id="topcontainer">
+		
+		<div id="center1" ng-class="{'front': showFront}">
+			child 1/z-index 1
+			The percentage used in transform is the targeted element's demension. Not containing element.
+			
+			<div id="highIndex">
+				<b>Z-index: 100. Will not show in default since it is in center1's stacking context</b>
+			</div>
+		
+		</div>
+		<div id="center2">
+			child 2: z-index 2
+			The percentage used in transform is the targeted element's demension. Not containing element.
+		
+		</div>
+		
+	
+	</div>
+
+
+<script src="../angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module("test", []).controller("test", function($scope, $window){
+			$scope.showFront=false;
+			
+		});
+	</script>
+</body>
+</html>
