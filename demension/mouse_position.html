@@ -1,0 +1,78 @@
+<html ng-app="test">
+	<head>
+		<title>demo the transition</title>
+		
+		<style type="text/css">
+			body {
+				margin: 0px;
+			}
+		
+			#top {
+				 /*
+				 use border box so that the border is within the 100%;
+				 
+				 If we  use content-box(default), the total width willbe 100% +5px+5px;
+				 */
+				 box-sizing:border-box;
+				 width: 100%;
+				 height:150%;
+				 border: 5px solid blue;
+				 position: relative;
+				 background-color: grey;
+			
+			}
+			
+			#circle {
+				position:absolute;
+				top:98%;
+				width:100px;
+				height:100px;
+				background-color: red;
+				margin-left:50%;
+				border: 5px solid black;
+				padding: 5px;
+			}
+			#pos {
+				position:absolute;
+				top:80%;
+				
+			}
+			
+		</style>
+	</head>
+<body>
+
+	<div id="top" ng-controller="test">
+		
+		<div id="pos">
+			<p> click position</p>
+			<p>pageY(to top of page) {{pageY}}</p>
+			<p>clientY(to top of viewport) {{clientY}}</p>
+			<p>offsetY(to top of padding box) {{offsetY}}</p>
+			<p>layerY(to the top of border box) {{layerY}}</p>
+			<p>pageYOffset (page at the top, not in viewport) {{pageYOffset}}</p>
+		</div>
+		<div id="circle" ng-click="showPosition($event)">
+			Click me
+		</div>
+	</div>
+
+</body>
+	
+	<script src="../angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module("test", []).controller("test", function($scope, $window){
+			$scope.showPosition=function($event){
+				$scope.pageY=$event.pageY;
+				$scope.clientY=$event.clientY;
+				$scope.offsetY=$event.offsetY;
+				$scope.layerY=$event.layerY;
+				$scope.pageYOffset=window.pageYOffset;
+			};
+		})
+	</script>
+	<script>
+		document.getElementById("circle").scrollIntoView();
+	</script>
+	
+</html>
