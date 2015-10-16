@@ -65,7 +65,7 @@ body {
 <body ng-controller="test">
 	
 	<div>
-		<button ng-click="showFront=true;">show first children</button>
+		<button ng-click="showFront=!showFront;">show first children</button>
 	</div>
 	<div id="topcontainer">
 		
@@ -74,7 +74,7 @@ body {
 			The percentage used in transform is the targeted element's demension. Not containing element.
 			
 			<div id="highIndex">
-				<b>Z-index: 100. Will not show in default since it is in center1's stacking context</b>
+				<b>Z-index: 100. Will not show in default since it is in center1's stacking context. The actual z-index is 1.100</b>
 			</div>
 		
 		</div>

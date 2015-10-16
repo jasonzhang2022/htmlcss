@@ -1,0 +1,120 @@
+<html ng-app="test">
+	<head>
+		<title>Float</title>
+		
+		<style type="text/css">
+			body {
+				margin: 0px;
+			}
+			
+			.boxcontainer {
+				height: 200px;
+				border: 1px solid black;
+			
+			}
+			.box {
+				width: 100px;
+				height: 100px;
+				background-color: green;
+				float: left;
+			}
+			.middle {
+			border: 3px dotted red;
+			}
+			
+			.clearfix:AFTER {
+				visibility: visible;
+				height: 0px; /*occupy no space */
+				content: ".";
+				clear: both;
+				display: block;
+				
+			}
+			
+		</style>
+	</head>
+<body>
+	<div>
+		<a href="https://css-tricks.com/all-about-floats/"> Reference</a>
+	</div>
+	
+	<div class="boxcontainer">
+		Middle div is has dotted border with no text
+		<div class="middle">
+			<div class="box">
+			
+			</div>
+		</div>
+		
+	</div>
+	<div class="boxcontainer">
+		Middle div is has dotted border 
+		<div class="middle">
+			has some text
+			<div class="box">
+			
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="boxcontainer" ng-controller="test">
+		Middle div is has dotted border 
+		<div class="middle">
+			has regular at end containing the button
+			<div class="box" ng-hide="hidebox">
+			
+			</div>
+			<div style="background-color:yellow;border: 5px dashed black;">
+				<div>
+					<button ng-click="hidebox=!hidebox">Hide floated</button>
+					This div is layed as if float element doesnot exist (as position absolute), but its content flow around
+					 floated element. Its background and border does not flow around the floated element. Resize the viewport width to see effect.
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="boxcontainer">
+		Middle div is has dotted border 
+		<div class="middle" style="overflow:auto;">
+			overflow auto
+			<div class="box">
+			
+			</div>
+		</div>
+		
+	</div>
+	<div class="boxcontainer">
+		Middle div is has dotted border 
+		<div class="middle" >
+			empty clear div
+			<div class="box">
+			
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		
+	</div>
+	
+	<div class="boxcontainer">
+		Middle div is has dotted border 
+		<div class="middle clearfix" >
+		clear fix class
+			<div class="box">
+			
+			</div>
+		</div>
+		
+	</div>
+	
+
+</body>
+	
+	<script src="angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module("test", []).controller("test", function($scope, $window){
+
+		})
+	</script>
+</html>

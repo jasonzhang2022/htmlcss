@@ -1,0 +1,87 @@
+<html ng-app="test">
+	<head>
+		<title>default z-index</title>
+		
+		<style type="text/css">
+			body {
+				margin: 0px;
+			}
+			
+			.boxcontainer {
+
+				width: 200px;
+				border: 1px solid black;
+				position:relative;
+			
+			}
+			.box {
+				width: 100px;
+				height: 100px;
+				background-color: green;
+				float: left;
+			}
+			.middle {
+			border: 3px dotted red;
+			}
+			
+		</style>
+	</head>
+<body>
+	<div>
+		<a href="http://timkadlec.com/2008/01/detailed-look-at-stacking-in-css/"> Reference</a>
+		<ol>
+		<li>Positioned elements with z-index of greater than 0, first in order of z-index from lowest to highest, then in order of appearance in source code</li>
+		<li>Positioned elements, in order of appearance in source code</li>
+		<li>Inline elements</li>
+		<li>Non-positioned floating elements, in order of appearance in source code</li>
+		<li>All non-positioned, non-floating, block elements in order of source code</li>
+		<li>Positioned elements with z-index of less than 0, first in order of z-index from highest to lowest, then in order of appearance in source code.</li>
+		<li>Root element backgrounds and borders</li>
+		</ol>
+		<b>3,4,5 usually don't overlap with each other since content of inline element and regular block will wrap around float element</b>
+	</div>
+	<div>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context">Establish stacking context</a>
+		
+	</div>
+	<div class="boxcontainer" ng-controller="test">
+		<div style="background-color:red;float:right; width:100px;">
+			Floating elements. Floating elements.
+		</div>
+		<div style="border: 1px solid purple;">
+			Regular div Regular div Regular div Regular div Regular div Regular div
+		</div>
+		
+		This is inline text. This is inline text. This is inline text. 
+		
+		
+		
+		This is inline text. This is inline text. This is inline text.
+		This is inline text. This is inline text. This is inline text. This is inline text. This is inline text. This is inline text.
+		<div style="position:absolute;background-color:yellow;z-index: 1;top: 0px;" ng-hide="hideabsolute">
+			positioned z-index 1;
+		</div>
+		<div style="position:absolute;background-color:gray;top:0px;"  ng-hide="hideabsolute">
+			positioned without z-index
+		</div>
+		<div style="position:absolute;background-color:green;top:0px;z-index: -1" >
+			positioned z-index 1, -1 positioned z-index 1 -1
+		</div>
+		<button ng-click="hideabsolute=!hideabsolute"> toggle absolute positioned elements with z-index>=0</button>
+		
+		
+		
+		
+	</div>
+	
+	
+	
+</body>
+	
+	<script src="angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module("test", []).controller("test", function($scope, $window){
+			
+		})
+	</script>
+</html>
