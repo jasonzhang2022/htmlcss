@@ -1,5 +1,9 @@
+<!DOCTYPE html>
+
 <html>
 
+<head>
+<meta charset="UTF-8">
 <style>
 	article {
 		outline: 2px solid red;
@@ -7,10 +11,30 @@
 	}
 
 </style>
+<style type="text/css">
+            table { border-collapse:collapse; }
+td, th {border: 1px black solid; padding: 3px; }
+th {background-color: lightgray; }
+.exampleText1 >div { width:75px; -webkit-writing-mode: horizontal-tb;}
+.exampleText6 >div { width:75px; -webkit-writing-mode: horizontal-bt;}
+.exampleText2 >div{ height:75px; -webkit-writing-mode: vertical-lr; }
+.exampleText3 >div{ height:75px; -webkit-writing-mode: vertical-rl; }
+.exampleText4 >div{ height:75px; -webkit-writing-mode: sideways-lr; }
+.exampleText5 >div{ height:75px; -webkit-writing-mode: sideways-rl; }
+        </style>
+</head>
 <body>
 
-
+	
 	<article>
+		<div>
+		The direction property in CSS sets <b>the direction of of content flow</b> within a block-level element. This applies to text, inline,
+		 and inline-block elements. It also sets <b>the default alignment of text and the direction that table cells flow within a table row.</b>
+		 There is an HTML attribute for setting the direction as well: 
+		 <b>
+		 	&lt;body dir="rtl"&gt;
+		 </b>
+		</div>
 		<strong>Show direction: direction is acting like right-aligned</strong>
 		<div style="direction: rtl;">
 			<h1>Heading</h1>
@@ -45,7 +69,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>td1</td>
+					<td>This is text for first cell</td>
 					<td>td2</td>
 
 				</tr>
@@ -56,14 +80,14 @@
 	<article>
 		<strong>Show writing mode: basic:vertical-rl</strong>
 		<div style="-webkit-writing-mode: vertical-rl; width: 100%;">
-			<h1>Heading</h1>
+			<h1>Heading 1</h1>
 			This is a atext line;
 		</div>
 	</article>
 	<article>
 		<strong>Show writing mode: basic:vertical-lr</strong>
 		<div style="-webkit-writing-mode: vertical-lr; width: 100%;">
-			<h1>Heading</h1>
+			<h1>Heading1</h1>
 			This is a atext line;
 		</div>
 	</article>
@@ -87,12 +111,61 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>td1</td>
+				<td>This is text for first cell</td>
 					<td>td2</td>
 
 				</tr>
 			</tbody>
 		</table>
+	</article>
+	
+	<article>
+	<div><strong>Sideway is not supported by webkit. You have to wrap text in a div</strong></div>
+	<table>
+    <tbody><tr>
+        <th>value</th>
+        <th>Vertical script</th>
+        <th>Horizontal script</th>
+        <th>Mixed script</th>
+    </tr>
+    <tr>
+        <td>horizontal-tb</td>
+        <td class="exampleText1"><div>我家没有电脑。</div></td>
+        <td class="exampleText1"><div>Example text</div></td>
+        <td class="exampleText1"><div>1994年に至っては</div></td>
+    </tr>
+    <tr>
+        <td>horizontal-tb</td>
+        <td class="exampleText6"><div>我家没有电脑。</div></td>
+        <td class="exampleText6"><div>Example text</div></td>
+        <td class="exampleText6"><div>1994年に至っては</div></td>
+    </tr>
+    <tr>
+        <td>vertical-lr/td>
+        <td class="exampleText2"><div>我家没有电脑。</div></td>
+        <td class="exampleText2"><div>Example text</div></td>
+        <td class="exampleText2"><div>1994年に至っては</div></td>
+    </tr>
+    <tr>
+        <td>vertical-rl</td>
+        <td class="exampleText3"><div>我家没有电脑。</div></td>
+        <td class="exampleText3"><div>Example text</div></td>
+        <td class="exampleText3"><div>1994年に至っては</div></td>
+    </tr>
+    <tr>
+        <td>sideways-lr</td>
+        <td class="exampleText4"><div>我家没有电脑。</div></td>
+        <td class="exampleText4"><div>Example text</div></td>
+        <td class="exampleText4"><div>1994年に至っては</div></td>
+    </tr>
+    <tr >
+        <td>sideways-rl</td>
+        <td class="exampleText5"><div>我家没有电脑。</div></td>
+        <td class="exampleText5"><div>Example text</div></td>
+        <td class="exampleText5"><div>1994年に至っては</div></td>
+    </tr>
+                    
+</tbody></table>
 	</article>
 	<article>
 		<strong>white-space:pre</strong>
@@ -134,7 +207,7 @@
 	
 	<article>
 		<strong> text overflow</strong>
-		<div style="width:100px;height:20px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap">
+		<div style="width:100px;height:20px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap; border: 1px dashed black">
 			 a lot of text bounded by 100x20, we will have text overflow
 		</div>
 	</article>
@@ -143,23 +216,36 @@
 		<strong> text layout</strong>
 		<ol>
 			<li>Do we have overflow? if Yes, then we have overflow rule</li>
-			<li>If overflow is handled as clip, hidden, or wrap: 
-			<ul>
-				<li>overflow is handled as hidden, do we need to show "ellipsis"? if yex, text-overflow:ellipsis</li>
-				<li>overflow is handled as clipped</li>
-				<li>overflow is handled as wrap, how do we handle word-break: overflow-wrap: break-word</li>
-			</ul>
-			<li> if no overflow, how is line break in text is handled(white-space)</li>
-			<li> if line break is needed, how is word-break is handled: word-break:break-all/break-word. if not break-all, browser will adjust white space to make sure 
-			line break does not break word.</li>
-		
+			<li>If overflow is handled as clip, hidden
+				<ul>
+					<li>overflow is handled as hidden, do we need to show "ellipsis"? if yes, text-overflow:ellipsis</li>
+					<li>overflow is handled as clipped</li>
+				</ul>
+			</li>
+			<li> Do we have text wrap(white-space)
+				<ul>
+					<li><strong>normal</strong>: white spaces collapse. Line break is ignored. Browser breaks line as necessary.</li>
+					<li><strong>nowrap</strong>: white spaces collapse. Line break is ignored. Browser breaks line only when &lt;br/&gt;</li>
+					<li><strong>pre</strong>: white spaces/line breaks are respected. </li>
+					<li><strong>pre-line</strong>: white spaces are <b>collapsed</b>. Browser breaks lines on line break, &lt;br/&gt; and necessary</li>
+					<li><strong>pre-wrap</strong>: White spaces are <b>not collapsed</b>.  Browser breaks lines on line break, &lt;br/&gt; and necessary</li>
+					
+				</ul>
+			</li>
+			<li> How does browser break line if needed?
+				<ul>
+					<li>word-wrap: normal</li>
+					<li>word-wrap:break-word</li>
+					<li>word-break: break-all|keep-all|normal, for CJK character</li>
+				</ul>
+			</li>
 		</ol>
 		<mark> Also see how inline-block can be used to for layout instead of float</mark>
-		<div style="width:200px;height:100px; word-break:break-word;display: inline-block;">
-			 Someone is making somebody angry. Please see the word alignment.
+		<div style="width:200px;height:100px; word-wrap:break-word;display: inline-block;">
+			 Someone is making somebodysomebodysomebodysomebodysomebody angry. Please see the word wrap.
 		</div>
-		<div style="width:200px;height:100px; word-break:break-all;display: inline-block;">
-			 Someone is making somebody angry. Please see the word alignment.
+		<div style="width:200px;height:100px; word-wrap:break-word;display: inline-block;">
+			 Someone is making somebodysomebodysomebodysomebodysomebody angry. Please see the word wrap.
 		</div>
 	
 	</article>
