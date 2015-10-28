@@ -6,7 +6,7 @@
 CSRF targets server state changes function. It does not steal data. 
 
 #How does it attack?
-It assumes that victim is authenticated.  It then performs a http GET/POST against server as victim without victim knowing it.
+It assumes that victim is authenticated.  It then performs a http GET/POST against server as victim without victim knowing it. It is also termed as "session ride". The request originated from csrf attack will automatically have cookie supplied by browser.
 
 ##Attack by GET
 For example, it sends an email(web email) containing a link with a attractive title like  My Picture. Once user clicks it, the action against server is performed. 
@@ -40,9 +40,13 @@ One token in cookie,  and one token in http header(or hidden form field). Compar
 1. **No session**
 2. **No Memory**
 3. **Comparison based **
+4. **Cookies cannot be tagged as HTTPONLY**
+5. **Potential XSS vulnerabilities in subdomains can introduce poisoned cookies in upper domains**
  
 ## Encrypted Token Pattern
 
 [reference](http://insidethecpu.com/2015/04/10/protecting-asp-net-applications-against-csrf-attacks/)
 
+## Origin header
+Origin header is not a good way to defend against CRSF since it is not required for same origin request.
 
