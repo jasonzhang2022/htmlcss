@@ -1,0 +1,116 @@
+<html ng-app="test">
+<head>
+<title>SVG practice</title>
+<style>
+form > *{
+	display:block;
+} 
+
+.hidden {
+	visibility:hidden;
+}
+
+</style>
+</head>
+<body>
+<svg  width="1000px" height="500px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+        <marker id="Triangle"
+                refX="0" refY="5"
+                markerWidth="10" 
+                markerHeight="10"
+                orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+	    </marker>
+    </defs>
+    <circle cx="250" cy="250" r="200" fill="yellow"/>
+	<path id="clock" d="M 0, 0" marker-end="url(#Triangle)" stroke-width="2" stroke="blue" fill="none"  class="hidden"/>
+	
+	
+	 <ellipse cx="750" cy="250" rx="100"  ry="200" fill="yellow"/>
+	 <path id="ellipse" d="M 0, 0" marker-end="url(#Triangle)" stroke-width="2" stroke="blue" fill="none" class="hidden"/>
+
+</svg>
+<hr/>
+<div style="float:left;width:500px;" ng-controller="circle">
+<form name="fake">
+	<button ng-click="reshow();">reshow</button>
+	<label>Start hour: <input type="number" ng-model="start" name="start"></input></label>
+	<label>end hour: <input type="number" ng-model="end" name="end"></input></label>
+	<label>X rotation: <input type="number" ng-model="xrotation" name="xrotation"></input></label>
+	<label>large arc: <input type="checkbox" ng-model="large" name="large"></input></label>
+	<label>sweep flag <input type="checkbox" ng-model="sweep" name="sweep"></input></label>
+	
+</form>
+</div>
+<div style="float:left" ng-controller="ellipse">
+<form name="fake">
+	<button ng-click="reshow();">reshow</button>
+	<label>Start hour: <input type="number" ng-model="start" name="start"></input></label>
+	<label>end hour: <input type="number" ng-model="end" name="end"></input></label>
+	<label>X rotation: <input type="number" ng-model="xrotation" name="xrotation"></input></label>
+	<label>large arc: <input type="checkbox" ng-model="large" name="large"></input></label>
+	<label>sweep flag <input type="checkbox" ng-model="sweep" name="sweep"></input></label>
+	
+</form>
+</div>
+	<script src="../angular.min.js"></script>
+	<script type="text/javascript">
+		//parametric equation of ellipse: http://www.mathopenref.com/coordparamellipse.html
+		//radian from horizontal center line clock wise.
+		function polarToCartesian(cx, cy, rx, ry, radian){
+			var x=cx+rx* Math.cos(radian);
+			var y=cy+ry*Math.sin(radian);
+			return [x, y];
+			
+		}
+		
+		/*
+		12 hours(12*60 minutes) are distrubuted to Math.PI*2
+		*/
+		function clockToRadian(time){
+			return Math.PI*2/(12*60)*time-Math.PI/2;
+		}
+	
+	
+		
+		angular.module("test", []).controller("circle", function($scope, $window){
+		
+			$scope.start=12;
+			$scope.end=7;
+			$scope.xrotation=0;
+			$scope.large=false;
+			$scope.sweep=false;
+			
+			$scope.reshow=function(){
+				var start=polarToCartesian(250, 250, 200,  200, clockToRadian($scope.start*60));
+				var end=polarToCartesian(250, 250, 200,  200, clockToRadian($scope.end*60));
+				document.getElementById("clock").setAttribute("d", "M "+start[0]+" "+start[1]
+				+" A 200 200 " //rx ry
+				+$scope.xrotation+" "+($scope.large?"1":"0")+" "+($scope.sweep?"1":"0")
+				+" "+end[0]+" "+end[1]);
+				
+				document.getElementById("clock").classList.remove("hidden");
+			}
+		}).controller("ellipse", function($scope, $window){
+			$scope.start=12;
+			$scope.end=7;
+			$scope.xrotation=0;
+			$scope.large=false;
+			$scope.sweep=false;
+			
+			$scope.reshow=function(){
+				var start=polarToCartesian(750, 250, 100,  200, clockToRadian($scope.start*60));
+				var end=polarToCartesian(750, 250, 100,  200, clockToRadian($scope.end*60));
+				document.getElementById("ellipse").setAttribute("d", "M "+start[0]+" "+start[1]
+				+" A 100 200 " //rx ry
+				+$scope.xrotation+" "+($scope.large?"1":"0")+" "+($scope.sweep?"1":"0")
+				+" "+end[0]+" "+end[1]);
+				
+				document.getElementById("ellipse").classList.remove("hidden");
+			}
+		});
+</script>
+</body>
+
+</html>
