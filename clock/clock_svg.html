@@ -1,6 +1,6 @@
 <html ng-app="test">
 <head>
-<title>SVG practice</title>
+<title>SVG clock</title>
 <style>
 form > *{
 	display:block;
@@ -32,12 +32,19 @@ form > *{
 	    </marker>
     </defs>
     <circle cx="250" cy="250" r="200" fill="yellow"/>
-    <line id="second" x1="250" y1="250" x2="250" y2="50" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
-     <line id="minute" x1="250" y1="250" x2="250" y2="55" stroke="blue" stroke-width="2" marker-end="url(#arrow)"/>
-      <line id="hour" x1="250" y1="250" x2="250" y2="60" stroke="green" stroke-width="4" marker-end="url(#arrow)"/>
-      <text id="secondtext" x="250" y="50">s</text>
+    <g id="second">
+	    <line  x1="250" y1="250" x2="250" y2="50" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+	    <text id="secondtext" x="250" y="50">s</text>
+    </g>
+    <g id="minute">
+     <line  x1="250" y1="250" x2="250" y2="60" stroke="blue" stroke-width="2" marker-end="url(#arrow)"/>
       <text id="minutetext" x="250" y="50">s</text>
+     </g>
+     
+     <g id="hour" >
+      <line x1="250" y1="250" x2="250" y2="70" stroke="green" stroke-width="4" marker-end="url(#arrow)"/>
       <text id="hourtext" x="250" y="50">s</text>
+      </g>
 </svg>
 <hr/>
 <div style="float:left;width:500px;" ng-controller="circle">
@@ -84,26 +91,17 @@ form > *{
 						$scope.second=date.getSeconds();
 						document.getElementById("second").setAttribute("transform", "rotate("+$scope.second*(360/60)+" 250 250)");
 						document.getElementById("secondtext").textContent=$scope.second;
-						var xy=polarToCartesian(250, 250, 200, 200, Math.PI*2/60*$scope.second-Math.PI/2);
-						document.getElementById("secondtext").setAttribute("x", xy[0]);
-						document.getElementById("secondtext").setAttribute("y", xy[1]);
 					}
 					if (date.getMinutes()!=$scope.minute){
 						$scope.minute=date.getMinutes();
 						document.getElementById("minute").setAttribute("transform", " rotate("+$scope.minute*(360/60)+" 250 250)");
 						document.getElementById("minutetext").textContent=$scope.minute;
-						var xy=polarToCartesian(250, 250, 200, 200, Math.PI*2/60*$scope.minute-Math.PI/2);
-						document.getElementById("minutetext").setAttribute("x", xy[0]);
-						document.getElementById("minutetext").setAttribute("y", xy[1]);
 					}
 					
 					if (date.getHours()!=$scope.hour){
 						$scope.hour=date.getHours()%12;
 						document.getElementById("hour").setAttribute("transform", "rotate("+$scope.hour*(360/12)+" 250 250)");
 						document.getElementById("hourtext").textContent=$scope.hour;
-						var xy=polarToCartesian(250, 250, 200, 200, Math.PI*2/12*$scope.hour-Math.PI/2);
-						document.getElementById("hourtext").setAttribute("x", xy[0]);
-						document.getElementById("hourtext").setAttribute("y", xy[1]);
 					}
 					
 				}, 1000, 0, false);
