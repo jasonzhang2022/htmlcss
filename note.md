@@ -21,7 +21,7 @@ content in Element after floating element will wrap around float element.  But i
 counter(identifier) is used to generate content for one-level counting. counters(identifier, separator) is used to generate content for multiple-level counting.
 
 **miscallenous**
-border-collapse, border-spacing
+border-collapse, border-spacing for table/ceel
 
 clip
 
@@ -54,3 +54,7 @@ You can use percentage for border-radius. It is relative to **target element not
 Percentage can be used for transform. It is relative to **target element not containing element **
 
 When use percent for position attribute (top and left), top is the percentage of the height of containing element and left is the percentage of width of containing element.
+
+
+** Absolute position **
+If top and left is not specified, their value is auto. Auto means browser calculates the position. It behaves like the absolute is not specified
